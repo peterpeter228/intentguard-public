@@ -1,0 +1,6 @@
+import {createHash} from 'node:crypto';import {checkScope} from '../dist/packages/near/scope-check.js';
+const now=new Date().toISOString(),hash='11111111111111111111111111111111';
+const base={schemaVersion:'ig-near-readonly-v1',source:'INJECTED_RPC_TEST',network:'testnet',accountId:'agent.testnet',startedAt:now,observedAt:now,block:{hash,height:1,requestedFinality:'final'},keys:{block_hash:hash,block_height:1,keys:[{public_key:'ed25519:syntheticfixture',access_key:{nonce:0,permission:{FunctionCall:{receiver_id:'wrap.testnet',method_names:['ft_balance_of'],allowance:'1000000000000000000000'}}}}]}};
+const snapshot={...base,evidenceHash:createHash('sha256').update(JSON.stringify(base)).digest('hex')};
+const proposal={accountId:'agent.testnet',publicKey:'ed25519:syntheticfixture',receiverId:'wrap.testnet',methodName:'ft_balance_of',gas:'10000000000000',depositYocto:'0',args:{account_id:'agent.testnet'}};
+console.log(JSON.stringify({mode:'FIXTURE_ATTACK_DEMONSTRATION',chainEvidence:false,results:[['bounded scope',proposal],['receiver substitution',{...proposal,receiverId:'attacker.testnet'}],['deposit injection',{...proposal,depositYocto:'1'}],['method substitution',{...proposal,methodName:'ft_transfer'}]].map(([scenario,p])=>({scenario,...checkScope(snapshot,p)}))},null,2));

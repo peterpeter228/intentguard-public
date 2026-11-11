@@ -1,0 +1,31 @@
+{
+  "name": "intentguard-local-policy-workbench",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "engines": {
+    "node": "24.22.1"
+  },
+  "workspaces": [],
+  "scripts": {
+    "doctor": "node --version && npm --version",
+    "test": "npm run build && node --test probes/runtime.test.mjs tests/*.test.mjs",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc",
+    "demo:offline": "npm run build && node scripts/demo-offline.mjs",
+    "evidence:verify": "node scripts/verify-evidence.mjs",
+    "start": "node dist/apps/api/server.js",
+    "start:init": "mkdir -p private && node dist/apps/api/server.js --init",
+    "demo:scope": "npm run build && node scripts/demo-scope.mjs",
+    "inspect:near": "npm run build && node scripts/inspect-near.mjs"
+  },
+  "dependencies": {
+    "better-sqlite3": "13.0.3",
+    "near-api-js": "7.4.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "9.6.0",
+    "@types/node": "24.19.2",
+    "typescript": "7.0.2"
+  }
+}

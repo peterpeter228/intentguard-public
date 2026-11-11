@@ -1,0 +1,2 @@
+import {readFileSync} from 'node:fs';import {verifyEvidence} from '../dist/packages/core/workbench.js';
+try{const i=process.argv.indexOf('--file');if(i<0||!process.argv[i+1])throw new Error('Usage: --file evidence.json');const result=verifyEvidence(JSON.parse(readFileSync(process.argv[i+1],'utf8')));console.log(result);process.exitCode=result==='OFFLINE_MATCH'?0:1;}catch(e){console.error('INVALID:',e.message);process.exitCode=1;}
