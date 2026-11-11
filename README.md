@@ -54,3 +54,11 @@ See [provenance](PROVENANCE.md), [verification](VERIFICATION.md) and [release ma
 ## License
 
 Original project source and documentation are available under the [MIT License](LICENSE), copyright 2026 peterpeter228. Third-party dependencies retain their own licenses; this grant does not relicense them. Dependencies are referenced by the lockfile, not bundled into this repository. Preserve their license/notice requirements when distributing dependency code or built bundles.
+
+## Existing work and competition diff
+
+Review the [fixed preparation-to-application diff](https://github.com/peterpeter228/intentguard-public/compare/96336afbd01a661fa3b3e3b03bcd063589f892bc...e7e91887647501454246779155cd4f085a3d9694) on dedicated branch [review/hackathon-diff-20261111](https://github.com/peterpeter228/intentguard-public/tree/review/hackathon-diff-20261111).
+
+The baseline is an explicitly labeled, sanitized export of five pre-existing files from October26: dependency manifest/lockfile, TypeScript configuration, gitignore and a generic runtime probe. The application directories did not exist at that baseline. New work adds the budget core, API/UI, finalized NEAR inspection, unsigned scope diagnostic, demonstrations and application tests. Dependencies and the retained runtime probe are reused, not claimed as new inventions.
+
+Both comparison commits were exported now; they are not original-date commits. Private history and unshipped private material are intentionally omitted. The compared final tree is byte-identical to public release 07ff4783fa87add4cd024f02f809bfab69f38d90; subsequent documentation updates do not change application source. Official Q-001 permits work from October19, so October26 is our internal preparation baseline within that window, not an official pre-hackathon cutoff. See [detailed provenance](PROVENANCE.md).

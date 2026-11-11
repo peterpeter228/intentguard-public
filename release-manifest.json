@@ -9,13 +9,13 @@
     },
     {
       "path": "README.md",
-      "gitBlobSha": "a1f8512e78cf088e0fff2f67fd455b8e313dd888",
-      "sha256": "de1262cc510513573a76df6e1851b90ab30aa710ac19c6a8394f4c173baa0346"
+      "gitBlobSha": "bde7b1741d0fbb389a3d052c7050c7350c3369b0",
+      "sha256": "40d705c242e81a5923ffb9f1805aa2a1958f7de12a976ac2339c46094f0f5bca"
     },
     {
       "path": "PROVENANCE.md",
-      "gitBlobSha": "38fd0202b38d5b51f2eede0c4613ae6d8c862509",
-      "sha256": "d936d60070ddf12980ca14c258bac96857a7e2e52b8171272e2a27e7c6b3fbf6"
+      "gitBlobSha": "3314318383ede1177269099d0b5de3c7031ff9bb",
+      "sha256": "d0b61df6dd79cb9e557207b9500633f929a57c1256eab8acbb31fd660b8f1f43"
     },
     {
       "path": "VERIFICATION.md",
