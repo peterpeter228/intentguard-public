@@ -13,6 +13,8 @@
     "noEmitOnError": true
   },
   "include": [
-    "probes/**/*.ts"
+    "probes/**/*.ts",
+    "packages/**/*.ts",
+    "apps/**/*.ts"
   ]
 }
