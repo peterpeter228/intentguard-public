@@ -50,3 +50,7 @@ Open Innovation: a human-reviewable combination of chain capability inspection a
 Official rules: https://nearhackathon.com/HACKATHON.md . Public demo video, prize-account compliance and actual submission remain separate unfinished steps.
 
 See [provenance](PROVENANCE.md), [verification](VERIFICATION.md) and [release manifest](release-manifest.json).
+
+## License
+
+Original project source and documentation are available under the [MIT License](LICENSE), copyright 2026 peterpeter228. Third-party dependencies retain their own licenses; this grant does not relicense them. Dependencies are referenced by the lockfile, not bundled into this repository. Preserve their license/notice requirements when distributing dependency code or built bundles.

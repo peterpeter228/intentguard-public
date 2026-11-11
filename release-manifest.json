@@ -1,6 +1,6 @@
 {
   "sourceCommit": "15e56d023ba4d2ffb35efd6dfef7a774140bf08c",
-  "publication": "clean snapshot; private history excluded",
+  "publication": "clean snapshot; private history excluded; MIT grant added with owner consent",
   "files": [
     {
       "path": "tsconfig.json",
@@ -9,13 +9,13 @@
     },
     {
       "path": "README.md",
-      "gitBlobSha": "06aa7dea5cc44695ebb6616e27f7e0c2fc38367a",
-      "sha256": "0a896a9e7850fa8b0a642865c553e73a9251975185df5bf7db958cc5a44a86ba"
+      "gitBlobSha": "a1f8512e78cf088e0fff2f67fd455b8e313dd888",
+      "sha256": "de1262cc510513573a76df6e1851b90ab30aa710ac19c6a8394f4c173baa0346"
     },
     {
       "path": "PROVENANCE.md",
-      "gitBlobSha": "ef297a23fb4be3cbebbeec2d5bd14498c4f43ba1",
-      "sha256": "251b73fe0e0728a12e13be8527d6d1acf6d58176bdbc8ef1cbfec7875b56b3ef"
+      "gitBlobSha": "38fd0202b38d5b51f2eede0c4613ae6d8c862509",
+      "sha256": "d936d60070ddf12980ca14c258bac96857a7e2e52b8171272e2a27e7c6b3fbf6"
     },
     {
       "path": "VERIFICATION.md",
@@ -24,8 +24,8 @@
     },
     {
       "path": "package.json",
-      "gitBlobSha": "b17e2928e1714571a267fc69151530148e5a0659",
-      "sha256": "bb1f2c6a37753fb84b0093616be1dd22dcf8fcdb1723883f329c565927e082ca"
+      "gitBlobSha": "74d9a575820b3fc3e36b351526aba50971df6c6a",
+      "sha256": "3426702817ede9409ceb3f8495c24533d3cae2040fc68d2a6b878002c2664128"
     },
     {
       "path": ".gitignore",
@@ -34,8 +34,8 @@
     },
     {
       "path": "package-lock.json",
-      "gitBlobSha": "e1fd41fedcd83584c51c364cb3409550720db765",
-      "sha256": "544d61e0d7913cde65d40619b4c570d5a2e672734d0b9f764483b3a330c72222"
+      "gitBlobSha": "a5e7fcd024d57bd52cfa5207339713aabb37c5be",
+      "sha256": "3fba6d24cdd212f8e19e5dcd11ff329858af5921769a31ca598c6e7271f18317"
     },
     {
       "path": "probes/runtime.test.mjs",
@@ -121,6 +121,11 @@
       "path": "apps/web/style.css",
       "gitBlobSha": "cb9f7beaa4606d620466233c0d8a916dd9b950f7",
       "sha256": "5495e3f5c7de52975517c189eb23bc3842a818bd466ab498e236813f6d4b0fe2"
+    },
+    {
+      "path": "LICENSE",
+      "gitBlobSha": "2474f2f48d30f1c0bd5799405da636aebf0d1003",
+      "sha256": "1103960c267c949bce9ab8556de5577f1a6277bfe0f6a106712529f43cba3dfd"
     }
   ]
 }
