@@ -1,0 +1,162 @@
+{
+  "schemaVersion": "ig-near-readonly-v1",
+  "source": "LIVE_RPC_OBSERVATION",
+  "endpoint": "https://test.rpc.fastnear.com",
+  "network": "testnet",
+  "accountId": "wrap.testnet",
+  "startedAt": "2026-11-12T08:54:42.431Z",
+  "observedAt": "2026-11-12T08:54:46.482Z",
+  "block": {
+    "hash": "EME4YgqqGc3Gt39TjujECwy4Eskn5cC5iCNZrKGtnVJG",
+    "height": 277340858,
+    "requestedFinality": "final"
+  },
+  "account": {
+    "amount": "127311354338858641864107798095786",
+    "block_hash": "EME4YgqqGc3Gt39TjujECwy4Eskn5cC5iCNZrKGtnVJG",
+    "block_height": 277340858,
+    "code_hash": "DsbyUrKaSJAT91Pewfi71QExPLBooDp1z4sL9GUDhNHa",
+    "locked": "0",
+    "storage_paid_at": 0,
+    "storage_usage": 20970701
+  },
+  "keys": {
+    "keys": [
+      {
+        "access_key": {
+          "nonce": 2,
+          "permission": "FullAccess"
+        },
+        "public_key": "ed25519:2KMyVy4SwwSb7JLa9VpS4Qtmqh47jTZ87qNKnLTFjofR"
+      },
+      {
+        "access_key": {
+          "nonce": 87857002000001,
+          "permission": "FullAccess"
+        },
+        "public_key": "ed25519:4o41Pb7HgvqXb2tdWrLsRr6RgVEUJo7dcFfgdmZM4JWr"
+      },
+      {
+        "access_key": {
+          "nonce": 87857116000001,
+          "permission": "FullAccess"
+        },
+        "public_key": "ed25519:6epkUgJgmj1dBtSo5HfyU88rTBDYWXNrcp2QJQJ1XvmF"
+      },
+      {
+        "access_key": {
+          "nonce": 1,
+          "permission": "FullAccess"
+        },
+        "public_key": "ed25519:AJYBaVVUv6RZeqNx7KzLxE9Rif76w3Kme75LbtwpreFW"
+      },
+      {
+        "access_key": {
+          "nonce": 5,
+          "permission": "FullAccess"
+        },
+        "public_key": "ed25519:B1McjUYKq7tRgSRXTy5CZQuqD3hSH8C4SdQW462zL2WV"
+      }
+    ],
+    "block_hash": "EME4YgqqGc3Gt39TjujECwy4Eskn5cC5iCNZrKGtnVJG",
+    "block_height": 277340858
+  },
+  "keyPages": [
+    {
+      "block_hash": "EME4YgqqGc3Gt39TjujECwy4Eskn5cC5iCNZrKGtnVJG",
+      "block_height": 277340858,
+      "keys": [
+        {
+          "access_key": {
+            "nonce": 2,
+            "permission": "FullAccess"
+          },
+          "public_key": "ed25519:2KMyVy4SwwSb7JLa9VpS4Qtmqh47jTZ87qNKnLTFjofR"
+        },
+        {
+          "access_key": {
+            "nonce": 87857002000001,
+            "permission": "FullAccess"
+          },
+          "public_key": "ed25519:4o41Pb7HgvqXb2tdWrLsRr6RgVEUJo7dcFfgdmZM4JWr"
+        },
+        {
+          "access_key": {
+            "nonce": 87857116000001,
+            "permission": "FullAccess"
+          },
+          "public_key": "ed25519:6epkUgJgmj1dBtSo5HfyU88rTBDYWXNrcp2QJQJ1XvmF"
+        },
+        {
+          "access_key": {
+            "nonce": 1,
+            "permission": "FullAccess"
+          },
+          "public_key": "ed25519:AJYBaVVUv6RZeqNx7KzLxE9Rif76w3Kme75LbtwpreFW"
+        },
+        {
+          "access_key": {
+            "nonce": 5,
+            "permission": "FullAccess"
+          },
+          "public_key": "ed25519:B1McjUYKq7tRgSRXTy5CZQuqD3hSH8C4SdQW462zL2WV"
+        }
+      ]
+    }
+  ],
+  "assessments": [
+    {
+      "publicKey": "ed25519:2KMyVy4SwwSb7JLa9VpS4Qtmqh47jTZ87qNKnLTFjofR",
+      "nonce": 2,
+      "permission": "FullAccess",
+      "assessment": "UNRESTRICTED_ACCOUNT_AUTHORITY",
+      "reasons": [
+        "Can transfer assets, alter keys and delete the account. Not suitable as a limited agent credential. Owner control is not evidence of maliciousness."
+      ]
+    },
+    {
+      "publicKey": "ed25519:4o41Pb7HgvqXb2tdWrLsRr6RgVEUJo7dcFfgdmZM4JWr",
+      "nonce": 87857002000001,
+      "permission": "FullAccess",
+      "assessment": "UNRESTRICTED_ACCOUNT_AUTHORITY",
+      "reasons": [
+        "Can transfer assets, alter keys and delete the account. Not suitable as a limited agent credential. Owner control is not evidence of maliciousness."
+      ]
+    },
+    {
+      "publicKey": "ed25519:6epkUgJgmj1dBtSo5HfyU88rTBDYWXNrcp2QJQJ1XvmF",
+      "nonce": 87857116000001,
+      "permission": "FullAccess",
+      "assessment": "UNRESTRICTED_ACCOUNT_AUTHORITY",
+      "reasons": [
+        "Can transfer assets, alter keys and delete the account. Not suitable as a limited agent credential. Owner control is not evidence of maliciousness."
+      ]
+    },
+    {
+      "publicKey": "ed25519:AJYBaVVUv6RZeqNx7KzLxE9Rif76w3Kme75LbtwpreFW",
+      "nonce": 1,
+      "permission": "FullAccess",
+      "assessment": "UNRESTRICTED_ACCOUNT_AUTHORITY",
+      "reasons": [
+        "Can transfer assets, alter keys and delete the account. Not suitable as a limited agent credential. Owner control is not evidence of maliciousness."
+      ]
+    },
+    {
+      "publicKey": "ed25519:B1McjUYKq7tRgSRXTy5CZQuqD3hSH8C4SdQW462zL2WV",
+      "nonce": 5,
+      "permission": "FullAccess",
+      "assessment": "UNRESTRICTED_ACCOUNT_AUTHORITY",
+      "reasons": [
+        "Can transfer assets, alter keys and delete the account. Not suitable as a limited agent credential. Owner control is not evidence of maliciousness."
+      ]
+    }
+  ],
+  "limits": [
+    "RPC-provider observation, not independently verified state proof.",
+    "No account ownership, signer authentication or authorization proved.",
+    "No transaction, payment, contract behavior, historical key change or competition eligibility proved.",
+    "Current observation only; keys and code can change after this block.",
+    "No keys does not prove immutability; contract code may add keys. Account age, historical activity and reputation remain unknown."
+  ],
+  "evidenceHash": "6575407411fdedb15f98a804c240b01bc889ffafa2c10e91883175deaba4be46"
+}

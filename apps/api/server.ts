@@ -1,7 +1,7 @@
 import { checkScope } from '../../packages/near/scope-check.js';
 import { createServer } from 'node:http';
 import { readFileSync } from 'node:fs';
-import { inspectAccount, liveRpc, validAccount } from '../../packages/near/read-only.js';
+import { inspectAccount, liveRpc, validAccount, inspectionFailure } from '../../packages/near/read-only.js';
 import { Workbench, GuardError } from '../../packages/core/workbench.js';
 if (process.env.APP_MODE && process.env.APP_MODE !== 'fixture') throw new Error('Only fixture mode is implemented');
 if (process.env.ENABLE_SIGNER && process.env.ENABLE_SIGNER !== 'false') throw new Error('Signer is not implemented');
@@ -26,8 +26,8 @@ createServer(async(req,res)=>{
   const body=JSON.parse(Buffer.concat(chunks).toString('utf8')) as unknown;
   if(path==='/api/near-inspect'){
    if(!body||typeof body!=='object'||Array.isArray(body)||Object.keys(body).join(',')!=='accountId'||!validAccount((body as {accountId:unknown}).accountId)){send(400,{code:'INVALID_ACCOUNT_ID'});return;}
-   if(inspectionBusy||Date.now()-lastInspection<30_000){send(429,{code:'READ_ONLY_COOLDOWN'});return;}
-   inspectionBusy=true;lastInspection=Date.now();latestInspection=null;try{latestInspection=await inspectAccount((body as {accountId:string}).accountId,liveRpc);send(200,latestInspection);}catch(e){send(503,{code:e instanceof Error?e.message:'RPC_UNAVAILABLE'});}finally{inspectionBusy=false;}return;
+   if(inspectionBusy||Date.now()-lastInspection<30_000){send(429,{code:'READ_ONLY_COOLDOWN',message:'Wait before starting another live inspection.',retryAfterSeconds:Math.max(1,Math.ceil((30_000-(Date.now()-lastInspection))/1000))});return;}
+   inspectionBusy=true;lastInspection=Date.now();latestInspection=null;try{latestInspection=await inspectAccount((body as {accountId:string}).accountId,liveRpc);send(200,latestInspection);}catch(e){send(503,{...inspectionFailure(e),retryAfterSeconds:Math.max(1,Math.ceil((30_000-(Date.now()-lastInspection))/1000))});}finally{inspectionBusy=false;}return;
   }
   if(path==='/api/near-preflight'){if(!latestInspection){send(409,{code:'LIVE_OBSERVATION_REQUIRED'});return;}try{send(200,{...checkScope(latestInspection,body),observationAcquisition:'SERVER_LIVE_RPC'});}catch(e){send(400,{code:e instanceof Error?e.message:'INVALID_PREFLIGHT'});}return;}
   if(path==='/api/purchases'){send(200,db.propose(body));return;}

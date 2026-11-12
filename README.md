@@ -27,6 +27,12 @@ node dist/apps/api/server.js --init
 
 Open http://127.0.0.1:4173 on the same computer. On subsequent starts use `npm start`, without initialization. Do not expose this fixture server to the internet. The locked SQLite dependency requires a compatible native binary; supported Windows and Linux Node24 environments were tested.
 
+## RPC connectivity and tests
+
+`npm test` is deterministic and uses injected responses for RPC transport/error coverage; it does not prove live RPC reachability. Run `npm run inspect:near -- wrap.testnet` separately for a real read-only network check from the server's runtime. A successful check from another runtime does not prove this local server can connect.
+
+The live provider remains fixed at `https://test.rpc.fastnear.com`, with redirects rejected and a 12-second timeout per request. Transport failures show a sanitized explanation and a manual-retry cooldown. The server must have ordinary HTTPS connectivity to that provider. No fallback fixture, cached success, automatic retry, proxy/security reconfiguration, or signing is performed. If connectivity fails, repair the runtime/network separately; a clearer error message is not a network fix.
+
 ## Demonstration
 
 1. Inspect `wrap.testnet`: the live endpoint reads an account and access keys at one finalized block using a fixed public RPC provider.
@@ -61,4 +67,14 @@ Review the [fixed preparation-to-application diff](https://github.com/peterpeter
 
 The baseline is an explicitly labeled, sanitized export of five pre-existing files from October26: dependency manifest/lockfile, TypeScript configuration, gitignore and a generic runtime probe. The application directories did not exist at that baseline. New work adds the budget core, API/UI, finalized NEAR inspection, unsigned scope diagnostic, demonstrations and application tests. Dependencies and the retained runtime probe are reused, not claimed as new inventions.
 
-Both comparison commits were exported now; they are not original-date commits. Private history and unshipped private material are intentionally omitted. The compared final tree is byte-identical to public release 07ff4783fa87add4cd024f02f809bfab69f38d90; subsequent documentation updates do not change application source. Official Q-001 permits work from October19, so October26 is our internal preparation baseline within that window, not an official pre-hackathon cutoff. See [detailed provenance](PROVENANCE.md).
+Both comparison commits were exported now; they are not original-date commits. Private history and unshipped private material are intentionally omitted. The compared final tree is byte-identical to public release 07ff4783fa87add4cd024f02f809bfab69f38d90; that fixed comparison predates the November 12 RPC repair. Review the [complete current main delta](https://github.com/peterpeter228/intentguard-public/compare/96336afbd01a661fa3b3e3b03bcd063589f892bc...main) separately; this publication includes the November 12 repair. Official Q-001 permits work from October19, so October26 is our internal preparation baseline within that window, not an official pre-hackathon cutoff. See [detailed provenance](PROVENANCE.md).
+
+## Latest verification and submission status
+
+The November 12 bounded RPC repair passed 66 deterministic tests and real Windows Edge read-only checks. See [verification](VERIFICATION.md) and [review guide](HACKATHON.md). Public X demo video/link, prize-account compliance and organizer submission confirmation remain separate unfinished steps; this document does not claim they have happened.
+
+## Dependencies, reuse and AI assistance
+
+Runtime dependencies are better-sqlite3 13.0.3 (local SQLite persistence) and near-api-js 7.4.0 (retained NEAR SDK dependency). The current live read-only RPC path uses Node native fetch, not near-api-js. Development dependencies are TypeScript 7.0.2, @types/node 24.19.2 and @types/better-sqlite3 9.6.0. Exact transitive dependencies are recorded in package-lock.json and keep their own licenses.
+
+AI assistance was used for development, review and testing. Reused preparation material includes dependency configuration, TypeScript configuration, gitignore and generic runtime probes, as disclosed in PROVENANCE.md. No external application template was used. Reused infrastructure and dependencies are not claimed as novel application work.

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "ig-scope-check-v1",
+  "source": "SUPPLIED_SNAPSHOT_DIAGNOSTIC",
+  "claimedSnapshotSource": "LIVE_RPC_OBSERVATION",
+  "network": "testnet",
+  "outcome": "DENY",
+  "reasons": [
+    "SNAPSHOT_NOT_FRESH",
+    "FULL_ACCESS_NOT_AGENT_SCOPED"
+  ],
+  "policy": {
+    "id": "ig-readonly-scope-v1",
+    "network": "testnet",
+    "receiverId": "wrap.testnet",
+    "methodName": "ft_balance_of",
+    "maximumGas": "30000000000000",
+    "depositYocto": "0",
+    "maximumAgeMs": 120000
+  },
+  "policyHash": "af17797c62ece80e0a65fdcfaee44b7d95bdb124a1951cbc2f316206f4075630",
+  "proposal": {
+    "accountId": "wrap.testnet",
+    "publicKey": "ed25519:2KMyVy4SwwSb7JLa9VpS4Qtmqh47jTZ87qNKnLTFjofR",
+    "receiverId": "wrap.testnet",
+    "methodName": "ft_balance_of",
+    "gas": "10000000000000",
+    "depositYocto": "0",
+    "args": {
+      "account_id": "wrap.testnet"
+    }
+  },
+  "proposalHash": "28febe019f175101430147d17896001b52a3bee00e22b336c5ee2280ceee146c",
+  "snapshotHash": "6575407411fdedb15f98a804c240b01bc889ffafa2c10e91883175deaba4be46",
+  "block": {
+    "hash": "EME4YgqqGc3Gt39TjujECwy4Eskn5cC5iCNZrKGtnVJG",
+    "height": 277340858,
+    "requestedFinality": "final"
+  },
+  "checkedAt": "2026-11-12T08:58:14.200Z",
+  "signed": false,
+  "executed": false,
+  "authorizationGranted": false,
+  "limitations": [
+    "Local scope diagnostic only. No owner authentication or signing authority is granted.",
+    "Snapshot RPC evidence is not an independently verified state proof and can become stale.",
+    "Gas allowance is not an asset spending cap; gas cost and receiver behavior are not verified.",
+    "Full-access owner keys are normal, but are not accepted as limited agent keys by this policy."
+  ],
+  "observationAcquisition": "SERVER_LIVE_RPC"
+}

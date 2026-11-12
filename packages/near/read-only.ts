@@ -50,13 +50,34 @@ export async function inspectAccount(accountId:string,rpc:Rpc,now=()=>new Date()
  const report={schemaVersion:'ig-near-readonly-v1',source:rpc===liveRpc?'LIVE_RPC_OBSERVATION':'INJECTED_RPC_TEST',endpoint:rpc===liveRpc?RPC_URL:null,network:'testnet',accountId,startedAt,observedAt:now(),block:{hash:header.hash,height:header.height,requestedFinality:'final'},account,keys,keyPages:pages,assessments,limits:['RPC-provider observation, not independently verified state proof.','No account ownership, signer authentication or authorization proved.','No transaction, payment, contract behavior, historical key change or competition eligibility proved.','Current observation only; keys and code can change after this block.','No keys does not prove immutability; contract code may add keys. Account age, historical activity and reputation remain unknown.']};
  return {...report,evidenceHash:createHash('sha256').update(JSON.stringify(report)).digest('hex')};
 }
+class RpcFailure extends Error {}
+export function inspectionFailure(error:unknown){
+ const observationCodes=new Set(['INVALID_RPC_SCHEMA','INVALID_KEY_LIST','UNSUPPORTED_KEY_LIST_FIELDS','INVALID_ACCESS_KEY','INVALID_FUNCTION_CALL_KEY','UNSUPPORTED_FUNCTION_CALL_FIELDS','INVALID_ACCOUNT_ID','WRONG_NETWORK','INVALID_BLOCK','BLOCK_MISMATCH','KEY_BUDGET_EXCEEDED','INVALID_PAGINATION','INCOMPLETE_KEY_LIST','INVALID_ACCOUNT']);
+ const code=error instanceof RpcFailure||(error instanceof Error&&observationCodes.has(error.message))?error.message:'RPC_OBSERVATION_REJECTED';
+ const message=code==='RPC_TRANSPORT_UNAVAILABLE'
+  ? 'The local server cannot reach the fixed NEAR testnet RPC provider. Check server network connectivity and retry after the cooldown.'
+  :code==='RPC_TIMEOUT'
+  ? 'The NEAR testnet RPC request timed out. Retry after the cooldown.'
+  :code==='RPC_HTTP_429'
+  ? 'The NEAR testnet RPC provider is rate limiting requests. Wait before retrying.'
+  : 'A complete, valid NEAR testnet observation could not be obtained. Retry later; no scope authorization is available.';
+ return {code,message};
+}
 export const liveRpc:Rpc=async(method,params)=>{
  if(!['status','block','query'].includes(method))throw new Error('READ_ONLY_METHOD_REQUIRED');
  if(method==='query'&&!['view_account','view_access_key_list'].includes(String(params.request_type)))throw new Error('READ_ONLY_QUERY_REQUIRED');
+ try{
  const response=await fetch(RPC_URL,{method:'POST',redirect:'error',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:'intentguard-readonly',method,params}),signal:AbortSignal.timeout(12000)});
- if(!response.ok)throw new Error(`RPC_HTTP_${response.status}`);
- if(!response.body)throw new Error('RPC_EMPTY');const reader=response.body.getReader();let size=0;const chunks:Uint8Array[]=[];
- try{while(true){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>1_000_000)throw new Error('RPC_RESPONSE_TOO_LARGE');chunks.push(value);}}finally{await reader.cancel();}
+ if(!response.ok)throw new RpcFailure(`RPC_HTTP_${response.status}`);
+ if(!response.body)throw new RpcFailure('RPC_EMPTY');const reader=response.body.getReader();let size=0;const chunks:Uint8Array[]=[];
+ try{while(true){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>1_000_000)throw new RpcFailure('RPC_RESPONSE_TOO_LARGE');chunks.push(value);}}finally{await reader.cancel().catch(()=>{});}
  const data=obj(JSON.parse(Buffer.concat(chunks).toString('utf8')));
- if(data.error)throw new Error('RPC_REPORTED_ERROR');if(data.jsonrpc!=='2.0'||data.id!=='intentguard-readonly'||!('result' in data))throw new Error('RPC_ENVELOPE_INVALID');return data.result;
+ if(data.error)throw new RpcFailure('RPC_REPORTED_ERROR');if(data.jsonrpc!=='2.0'||data.id!=='intentguard-readonly'||!('result' in data))throw new RpcFailure('RPC_ENVELOPE_INVALID');return data.result;
+ }catch(error){
+  if(error instanceof RpcFailure)throw error;
+  if(error instanceof Error&&['TimeoutError','AbortError'].includes(error.name))throw new RpcFailure('RPC_TIMEOUT');
+  if(error instanceof SyntaxError)throw new RpcFailure('RPC_INVALID_JSON');
+  if(error instanceof TypeError)throw new RpcFailure('RPC_TRANSPORT_UNAVAILABLE');
+  throw new RpcFailure('RPC_INVALID_RESPONSE');
+ }
 };

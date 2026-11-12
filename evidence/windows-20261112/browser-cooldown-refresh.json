@@ -1,0 +1,10 @@
+{
+  "before": {
+    "disabled": true,
+    "label": "Retry inspection in 8s"
+  },
+  "after": {
+    "disabled": true,
+    "label": "Retry inspection in 6s"
+  }
+}
